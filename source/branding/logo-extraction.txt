@@ -1,0 +1,8 @@
+Tool: built-in image_gen imagegen; transparent_background=true.
+Input: assets/anva-logo-source.png from the preserved v1.1 site.
+Output: assets/anva-emblem-source.png; served derivative: assets/anva-emblem.png.
+
+Prompt:
+Use case: background-extraction. Extract ONLY the central existing metallic emblem: gold sun crescent with its four gold triangular rays, silver crescent moon and shared four-point star. Preserve exact geometry, proportions, orientation, gold/silver materials and colors from the input. Remove the entire navy background, circular outer rim, and ANVA lettering below. The result must be the unchanged central sun/moon/shared-star symbol alone, tightly centered, on genuine transparent alpha. No redraw, no redesign, no new glow, no border, no typography, no additional objects. This is a clean navigation cutout of the supplied brand mark.
+
+The supplied source actually has five sun rays; the resulting cutout retains all five, despite the ray-count error in the prompt. Original source artwork is retained separately. This is a generated extraction, not a vector master or a claim of pixel-identical source recovery.
