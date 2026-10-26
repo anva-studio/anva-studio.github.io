@@ -1,34 +1,44 @@
-# ANVA
+# ANVA Software Shelf
 
-A static website for a tiny independent, AI-assisted studio. No build step, package installation, remote fonts, analytics, or third-party scripts.
+A small, standalone collection of released ANVA applications: **Folio** (personal finance) and **Character Paper** (characters and writing). The owner confirmed Folio's finance identity; the Markdown description in the initial brief was not used.
 
-## Pages
-- `index.html`: studio entrance and product introduction
-- `products.html`: the workbench catalogue
-- `about.html`: studio story and How We Work, including privacy and user control
-- `support.html`: coffee support and contact at `#contact`
-- `products/folio.html` and `products/character-paper.html`: released product pages
-- `404.html`: custom error page
+## Preview locally
 
-## Preview
-From this folder, run `python -m http.server 8000`, then visit `http://localhost:8000`. Use any ordinary static HTTP server if Python is unavailable.
+Open a terminal in this folder and run:
 
-## Deploy
-Commit the contents of this folder to the website repository. Configure GitHub Pages to serve the branch/folder containing `index.html`. `.nojekyll` enables straightforward static delivery. Document-relative links support a repository subpath as well as a custom domain. Canonical URLs use the supplied live ANVA address.
+```sh
+python -m http.server 8000 --bind 127.0.0.1
+```
 
-GitHub Pages serves the 404 page at the failed URL. Its self-contained error document works without external assets. It uses the known ANVA user-site root in production, and recovers the last visited local site base during subpath previews. A first visit to a missing page on another host under an arbitrary subpath needs a hosting-specific base adjustment.
+Open `http://127.0.0.1:8000/`. Stop the server with Ctrl+C. Python is only an optional preview tool; the published site needs no server runtime, build process, package installation or environment variables. Opening index.html directly also displays the page, though storage behavior can vary for local files.
 
-## Artwork and interaction
-All seven original PNGs remain intact in `Images/`. Delivery uses 640, 1280, and 1920 pixel WebP derivatives in `assets/`. The first scene loads eagerly; later artwork is lazy-loaded. Overview artwork retains its original CSS compositions; the detailed product pages use real supplied application screenshots. Fonts use the visitor’s system. JavaScript enhances navigation, theme selection, screenshot viewing, and 404 recovery. Navigation remains available without JavaScript.
+## Manual GitHub upload
 
-## Product releases and themes
-Both products are released, with direct Windows and Android download URLs and quiet canonical source links. No version numbers are presented in the visible page copy. Change release hrefs only when supplied with new verified URLs.
+Extract the ZIP. Upload **this folder's contents**, so `index.html`, `.nojekyll`, `css/`, `js/` and `assets/` sit at the repository publishing root. Do not upload only the ZIP or nest the whole folder one level below the publishing root. Include the hidden `.nojekyll` file.
 
-Themes are Midnight Studio and Cream Studio. A small synchronous inline initializer applies the saved `anva-theme` or system preference before styles load. Shared JavaScript handles the toggle, preference storage, and system changes until a user has selected a theme. Both themes are authored in the shared stylesheet.
+Expected root-level GitHub Pages configuration: **Settings → Pages → Build and deployment → Deploy from a branch**, select the branch containing these files, then **/(root)**. No custom workflow is required by this package. Existing repository configuration is yours to review; this work did not change it.
 
-Real app screenshots are served as readable WebP derivatives in `assets/screenshots/`; originals remain in `source/screenshots/`. Screenshot links open an accessible native dialog when JavaScript is available, or the image directly otherwise. Product claims were checked against the supplied release source; no bank sync, automatic payment matching, dedicated budget module, AI generation, collaboration, PDF, or Markdown-file export is advertised.
+Official guide: [Configure a publishing source](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
 
-The live canonical website is https://anva-studio.github.io/ . Canonical links target the user-site root.
+All website asset paths are document-relative, so they also work beneath a repository subpath. No Cloudflare headers, CNAME file, credentials, GitHub Actions workflow or deployment tools are included. The official studio links point to https://anvastudio.in/ . A portfolio canonical URL is intentionally omitted until its final address is chosen.
 
-## Official identity
-The supplied dual-metal logo source is preserved in `assets/anva-logo-source.png`. The header uses a proportion-preserving 168px WebP displayed at 42px (36px on mobile), with ANVA beside it. Local ICO, 16px/32px PNG favicons and a 180px Apple touch icon use a crop of the original sun, moon, and shared star without lettering. The 404 embeds the small logo/favicon to remain independent of the missing URL depth.
+## Add a genuinely released product
+
+1. Confirm the release, public description, supported platforms and exact links with the owner. Nothing is discovered or added automatically.
+2. Place approved, unmodified images in a new `assets/<product>/` directory. Record provenance and hashes in ASSETS.md. Do not recompress existing artwork.
+3. In index.html, duplicate a clearly marked `PRODUCT START` / `PRODUCT END` article. Give it a unique section ID and heading ID, truthful copy, meaningful image alt text, correct image aspect ratios, official product link and verified downloads. Use the existing layouts as a starting point; extend styles.css only if the product needs its own identity.
+4. Add a matching entry to `.shelf-index`, with the next number and working section link. Update the page description if needed.
+5. Check mobile/desktop and both themes, links, image loading, keyboard focus and reduced motion; update VERIFICATION.md. Hand over a fresh static ZIP for manual upload.
+
+Product content lives directly in semantic HTML, not JavaScript-generated cards. There is no generator to run and no data file to accidentally drift out of sync. Content, index links and downloads remain usable without JavaScript. JavaScript adds only theme preference and the current copyright year.
+
+## Implementation
+
+- `index.html`: semantic page and curated product information; early theme selection avoids an incorrect-palette flash.
+- `css/styles.css`: authored cream/midnight palettes, responsive layouts, focus states and gentle motion. Reduced-motion preferences disable entrance animation, transitions and smooth scrolling.
+- `js/main.js`: accessible keyboard-operable theme button, system preference on first visit and remembered explicit preference. Storage failures do not break the site.
+- Local approved branding and product screenshots. Typography uses Georgia and installed system UI fonts; no font downloads or external services.
+
+See **VERIFICATION.md** and **ASSETS.md** for checks and provenance. This package does not grant a new license to ANVA branding or application artwork; public repository visibility was verified separately and is not treated as a blanket license.
+
+**ANVA GitHub Software Shelf is ready for manual GitHub upload. No GitHub deployment or production website changes were performed.**
